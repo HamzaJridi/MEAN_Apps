@@ -1,8 +1,13 @@
 var express = require('express');
 var app = express();
+var mongojs = require('mongojs');
+//wich mongo db we're going to use
+var db = mongojs('contactlist', ['contactlist']);
 
+//set the default folder for static files : html, js, css
 app.use(express.static(__dirname + "/public"));
 
+//set the route for the contactlist page
 app.get('/contactlist', function(req, res) {
     console.log('I received a GET request');
 
@@ -23,6 +28,7 @@ app.get('/contactlist', function(req, res) {
         };
 
     var contactlist = [person1, person2, person3];
+    //send the data in a json format
     res.json(contactlist);
 });
 
