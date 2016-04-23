@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <!-- Bootstrap -->
@@ -11,12 +11,14 @@
     <title>Contact List App</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" ng-controller="AppCtrl">
         <h1>Contact List App</h1>
+        <p>{{message}}</p>
         <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
+
                 <th>Eamil</th>
                 <th>Number</th>
             </tr>
@@ -26,5 +28,6 @@
 
 
 
+<script src="controllers/AppCtrl.js"></script>
 </body>
 </html>
