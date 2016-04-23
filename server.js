@@ -3,28 +3,27 @@ var app = express();
 
 app.use(express.static(__dirname + "/public"));
 
-app.get('/contactList', function(req, res) {
+app.get('/contactlist', function(req, res) {
     console.log('I received a GET request');
-    res.send('I received a GET request');
-    var contactList = [
-        {
-            name : "tim",
-            email : "time@me.com",
-            number : "(111) 111 1111"
-        },
-        {
-            name : "Emily",
-            email : "emily@me.com",
-            number : "(222) 222 2222"
-        },
-        {
-            name : "John",
-            email : "john@me.com",
-            number : "(333) 333 3333"
-        }
 
-    ];
-    res.json(contactList);
+    person1 = {
+            name : "tim",
+            email:"time@me.com",
+            number:"(111) 111 1111"
+        };
+    person2 = {
+            name : "Emily",
+            email: "emily@me.com",
+            number: "(222) 222 2222"
+        };
+    person3 = {
+            name : "John",
+            email:"john@me.com",
+            number:"(333) 333 3333"
+        };
+
+    var contactlist = [person1, person2, person3];
+    res.json(contactlist);
 });
 
 app.listen(3000);
