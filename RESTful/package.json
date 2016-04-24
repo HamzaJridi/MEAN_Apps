@@ -1,0 +1,15 @@
+{
+  "name": "bookapi",
+  "version": "1.0.0",
+  "description": "a book API using RESTful web services, Node.js and Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamza",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "gulp": "^3.9.1"
+  }
+}
