@@ -15,7 +15,13 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
         $http.post('/contactlist', $scope.contact).success(function(response){
             console.log(response);
             $scope.contactlist.push(response);
+            $scope.contact = "";
         });
 
-    }
+    };
+
+    $scope.remove = function(id){
+        console.log(id);
+        $http.delete('/contactlist/' + id);
+    };
 }]);
