@@ -41,5 +41,14 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
             //get the sent back data from the server and put it in the input fields
             $scope.contact = response;
         });
-    }
+    };
+
+    $scope.update = function() {
+        console.log($scope.contact._id);
+        //send to the server the contact's updated data
+        $http.put('/contactlist/' + $scope.contact._id, $scope.contact).success(function(response) {
+            refresh();
+        });
+    };
+
 }]);
