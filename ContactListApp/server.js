@@ -43,5 +43,16 @@ app.delete('/contactlist/:id', function(req, res){
     });
 });
 
+//respond to the get req from the controller (the edit method)
+app.get('/contactlist/:id', function(req, res){
+    var id = req.params.id;
+    console.log(id);
+    //find the clicked contact in the db and send it back to the contrller
+    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
+        res.json(doc);
+    });
+
+});
+
 app.listen(3000);
 console.log('Listening on port 3000');

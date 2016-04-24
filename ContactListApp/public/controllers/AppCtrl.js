@@ -32,4 +32,14 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
             refresh();
         });
     };
+    /** on edit click we send a get req to the server to find the contact
+     * that we want to edit by its id, then the server will send it back
+     * and put it in the input fields*/
+    $scope.edit = function(id) {
+        console.log(id);
+        $http.get('/contactlist/' + id).success(function(response) {
+            //get the sent back data from the server and put it in the input fields
+            $scope.contact = response;
+        });
+    }
 }]);
