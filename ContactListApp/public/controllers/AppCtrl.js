@@ -12,6 +12,10 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
          * it's bound by the ng-model from input fields in index.html*/
         console.log($scope.contact);
         //send the input data to the server
-        $http.post('/contactlist', $scope.contact);
+        $http.post('/contactlist', $scope.contact).success(function(response){
+            console.log(response);
+            $scope.contactlist.push(response);
+        });
+
     }
 }]);
