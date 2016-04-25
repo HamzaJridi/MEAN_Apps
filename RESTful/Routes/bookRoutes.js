@@ -33,8 +33,10 @@ var routes = function(Book){
                 }
             });
         });
+
     /** create a Middleware to get the bookId and use it
      * in get,put and patch requests for a single book */
+
     bookRouter.use('/:bookId',function(req,res,next){
         /** getting a single book item by its Id */
         //get the id passed in the url using req.params
@@ -43,6 +45,7 @@ var routes = function(Book){
                res.status(500).send(err);
            } else if (book){
                req.book = book;
+               next();
            } else {
                res.status(404).send('Book not found');
            }
