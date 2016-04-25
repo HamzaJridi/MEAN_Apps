@@ -16,48 +16,10 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-var bookRouter = express.Router();
-/** set the book route using bookRouter.route('newRoute') method*/
-bookRouter.route('/Books')
-    //the post methode require the bodyParser
-    .post(function(req,res){
-        var book = new Book(req.body);
-        console.log(book);
-        res.send(book);
-    })
-    .get(function(req,res){
-        /** if we pass the url 'api/book?genre=Fiction'
-         * express will format this url query in a json format using req.query
-         * and the reslt will be req.query = { genre:'Fiction' }*/
-        var query =  {};
-        if(req.query.genre){//filtering books by genre if only exist
-            query.genre = req.query.genre;
-        }
+/** bookRouter is returned from the routes() method in
+ * the bookRoutes.js file */
+bookRouter = require('./Routes/bookRoutes')(Book);
 
-        //Book is an instance of the book Schema at the bookModel.js file
-        Book.find(query, function(err,books){
-            if(err){
-                res.status(500).send(err);
-            } else {
-                //display books data from the db as a json format
-                res.json(books);
-            }
-        });
-    });
-
-bookRouter.route('/books/:bookId')
-    .get(function(req,res){
-        /** getting a single book item by its Id */
-        //get the id passed in the url using req.params
-        Book.findById(req.params.bookId, function(err,book){
-            if(err){
-                res.status(500).send(err);
-            } else {
-                //display books data from the db as a json format
-                res.json(book);
-            }
-        });
-    });
 
 
 /**
@@ -65,7 +27,12 @@ bookRouter.route('/books/:bookId')
  *  every route'll be 'localhost:8000/api/newRoute'
  *  if you set app.use('/', bookRouter) the routes will be 'localhost:8000/newRoute'
  *  */
-app.use('/api', bookRouter);
+/** if we're on books route the 'bookRouter' will handle the page
+ * also in author route the 'authorRoute' will handle the page
+ * the routes() method that returns the bookRouter is the
+ * real handler of the books route*/
+app.use('/api/books', bookRouter);
+//app.use('/api/authors', authorRouter);
 
 
 
