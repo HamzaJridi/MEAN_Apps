@@ -14,8 +14,16 @@ var bookRouter = express.Router();
 /** set the book route using bookRouter.route('newRoute') method*/
 bookRouter.route('/Books')
     .get(function(req,res){
+        /** if we pass the url 'api/book?genre=Fiction'
+         * express will format this url query in a json format using req.query
+         * and the reslt will be req.query = { genre:'Fiction' }*/
+        var query =  {};
+        if(req.query.genre){//filtering books by genre if only exist
+            query.genre = req.query.genre;
+        }
+
         //Book is an instance of the book Schema at the bookModel.js file
-        Book.find(function(err,books){
+        Book.find(query, function(err,books){
             if(err){
                 res.status(500).send(err);
             } else {
