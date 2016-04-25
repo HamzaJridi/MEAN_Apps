@@ -33,6 +33,20 @@ bookRouter.route('/Books')
         });
     });
 
+bookRouter.route('/books/:bookId')
+    .get(function(req,res){
+        /** getting a single book item by its Id */
+        //get the id passed in the url using req.params
+        Book.findById(req.params.bookId, function(err,book){
+            if(err){
+                res.status(500).send(err);
+            } else {
+                //display books data from the db as a json format
+                res.json(book);
+            }
+        });
+    });
+
 
 /**
  * bookRouter'll load all the routes of the app
