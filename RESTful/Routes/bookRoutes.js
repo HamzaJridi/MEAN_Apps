@@ -35,14 +35,36 @@ var routes = function(Book){
         });
 
     bookRouter.route('/:bookId')
+        //get a specific item by its id and display it
         .get(function(req,res){
             /** getting a single book item by its Id */
-                //get the id passed in the url using req.params
+            //get the id passed in the url using req.params
             Book.findById(req.params.bookId, function(err,book){
                 if(err){
                     res.status(500).send(err);
                 } else {
                     //display books data from the db as a json format
+                    res.json(book);
+                }
+            });
+        })
+        //get a specific item by its id to update it
+        .put(function(req,res){
+            /** getting a single book item by its Id */
+            //get the id passed in the url using req.params
+            Book.findById(req.params.bookId, function(err,book){
+                if(err){
+                    res.status(500).send(err);
+                } else {
+                    /**replace the book properties with what has
+                     * come back from the req using req.body*/
+                    book.title = req.body.title;
+                    book.author = req.body.author;
+                    book.genre = req.body.genre;
+                    book.read = req.body.read;
+                    //save changes in the db
+                    book.save();
+                    //send back book to display it as a json frmt
                     res.json(book);
                 }
             });
