@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 /** open a connection to the db which is 'bookAPI'
  *  if the bookAPI db doesn(t exist it'll be created */
@@ -10,9 +11,20 @@ var Book = require('./models/bookModel');
 var app = express();
 var port = process.env.PORT || 3000;
 
+/** the bodyParser'll llok at the body, and if it has a json
+ * objct in it, it'll add it to the req.body by the post method*/
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
 var bookRouter = express.Router();
 /** set the book route using bookRouter.route('newRoute') method*/
 bookRouter.route('/Books')
+    //the post methode require the bodyParser
+    .post(function(req,res){
+        var book = new Book(req.body);
+        console.log(book);
+        res.send(book);
+    })
     .get(function(req,res){
         /** if we pass the url 'api/book?genre=Fiction'
          * express will format this url query in a json format using req.query
@@ -62,5 +74,5 @@ app.get('/', function(req, res){
 });
 
 app.listen(port, function(){
-    console.log('Gulp is running the app on port' + port);
+    console.log('Gulp is running the app on port ' + port);
 });
