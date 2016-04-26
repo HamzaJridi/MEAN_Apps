@@ -1,4 +1,7 @@
-myApp.controller('MainCtrl', ['$scope','posts',
+var appControllers = angular.module('appControllers', []);
+
+//The Home page controller
+appControllers.controller('MainCtrl', ['$scope','posts',
     function($scope,posts){
         $scope.test = 'Hello world from angular';
         /*list of posts ordered b up vote using angular filter
@@ -14,7 +17,11 @@ myApp.controller('MainCtrl', ['$scope','posts',
             $scope.posts.push({
                 title: $scope.title,
                 link: $scope.link,
-                upvotes : 0
+                upvotes : 0,
+                comments: [
+                    {author: 'Joe', body: 'Cool post!', upvotes: 0},
+                    {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
+                ]
             });
             $scope.title = "";
             $scope.link = "";
@@ -29,3 +36,24 @@ myApp.controller('MainCtrl', ['$scope','posts',
              $scope.posts.splice(i,1);*/
         };
     }]);
+
+//The Posts page controller
+appControllers.controller('PostsCtrl', [
+    '$scope',
+    '$routeParams',
+    'posts',
+    function($scope, $routeParams, posts) {
+        //get the clicked post by its ID
+        $scope.post = posts.posts[$routeParams.id];
+        // an add Comment method
+        $scope.addComment = function(){
+            if($scope.body === '') { return; }
+            $scope.post.comments.push({
+                body: $scope.body,
+                author: 'user',
+                upvotes: 0
+            });
+            $scope.body = '';
+        };
+    }
+]);

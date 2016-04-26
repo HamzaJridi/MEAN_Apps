@@ -1,13 +1,20 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', [
+    'ngRoute',
+    'appControllers'
+]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        .when('/posts', {
-            templateUrl : 'views/posts.html',
+        .when('/home', {
+            templateUrl : 'views/home.html',
             controller : 'MainCtrl'
         })
+        .when('/posts/:id', {
+            templateUrl : 'views/posts.html',
+            controller : 'PostsCtrl'
+        })
         .otherwise({
-            redirectTo : '/posts'
+            redirectTo : '/home'
         });
 }]);
 
