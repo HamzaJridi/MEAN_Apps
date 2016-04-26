@@ -10,12 +10,23 @@ myApp.controller('MainCtrl', ['$scope', function($scope){
         {title: 'post 4', upvotes: 9},
         {title: 'post 5', upvotes: 4}
     ];
+
+    //addPost() to add posts by users
     $scope.addPost = function(){
         //prevent the user to add an empty post
         if(!$scope.title || $scope.title === '') {
             return;
         }
         $scope.posts.push({title: $scope.title, upvotes : 0});
-        $scope.addpost = "";
+        $scope.title = "";
+    };
+
+    //incrementUpvotes() to enable incrementing upvotes
+    $scope.incrementUpvotes = function(post){
+        post.upvotes +=1;
+        /*a remove method example :
+        var i = $scope.posts.indexOf(post);
+        console.log(i)
+        $scope.posts.splice(i,1);*/
     };
 }]);
