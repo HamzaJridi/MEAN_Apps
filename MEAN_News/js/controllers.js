@@ -1,18 +1,8 @@
-var myApp = angular.module('myApp', ['ui.router']);
-
-//a posts service that contains the data
-myApp.factory('posts', [function(){
-    var o = {
-        posts: []
-    };
-    return o;
-}]);
-
 myApp.controller('MainCtrl', ['$scope','posts',
     function($scope,posts){
         $scope.test = 'Hello world from angular';
         /*list of posts ordered b up vote using angular filter
-        * posts.posts is the service.data*/
+         * posts.posts is the service.data*/
         $scope.posts = posts.posts;
 
         //addPost() to add posts by users
@@ -34,8 +24,8 @@ myApp.controller('MainCtrl', ['$scope','posts',
         $scope.incrementUpvotes = function(post){
             post.upvotes +=1;
             /*a remove method example :
-            var i = $scope.posts.indexOf(post);
-            console.log(i)
-            $scope.posts.splice(i,1);*/
-    };
-}]);
+             var i = $scope.posts.indexOf(post);
+             console.log(i)
+             $scope.posts.splice(i,1);*/
+        };
+    }]);
