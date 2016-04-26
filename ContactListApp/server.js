@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 /* wich mongo db we're going to use
-* the db = user, collection = [users] */
+* the db = user, collection = [users]
+* you can set a list of collections in the passed array */
 var db = mongojs('user', ['users']);
 var bodyParser = require('body-parser');
 
@@ -10,7 +11,8 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-//set the route for the contactlist page
+/*set the route for the contactlist page
+* users is the collection name in the user db */
 app.get('/users', function(req, res) {
     console.log('I received a GET request');
     /*docs : data already in the db

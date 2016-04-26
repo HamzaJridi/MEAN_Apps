@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>My News App</title>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div class="container" ng-controller = "MainCtrl">
+    <h1>{{test}}</h1>
+    <div ng-repeat="post in posts">
+        {{post}}
+    </div>
+</div>
+<scipt src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scipt>
+</body>
+</html>
