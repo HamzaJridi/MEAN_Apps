@@ -11,7 +11,7 @@ var Book = require('./models/bookModel');
 var app = express();
 var port = process.env.PORT || 3000;
 
-/** the bodyParser'll llok at the body, and if it has a json
+/** the bodyParser'll look at the body, and if it has a json
  * objct in it, it'll add it to the req.body by the post method*/
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
