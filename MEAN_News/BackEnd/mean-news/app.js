@@ -9,6 +9,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var mongoose = require('mongoose');
+var Post = require ('./models/Posts');
+var db = mongoose.connect('mongodb://localhost/news');
+
 var app = express();
 
 // view engine setup
