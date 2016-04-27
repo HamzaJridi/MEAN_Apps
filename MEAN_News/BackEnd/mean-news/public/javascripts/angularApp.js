@@ -12,14 +12,20 @@ myApp.config(['$routeProvider', function($routeProvider) {
             our home state is entered, we will automatically query all posts from
             our backend before the home page finishes loading.*/
             resolve: {
-                "check": ['posts', function(posts){
+                "postPromise": ['posts', function(posts){
                     return posts.getAll();
                 }]
             }
         })
-        .when('/posts/:id', {
+        .when('/posts/{id}', {
             templateUrl : '../html/posts.html',
-            controller : 'PostsCtrl'
+            controller : 'PostsCtrl',
+            resolve: {
+                post : ['$routeParams', 'posts',
+                        function($routeParams,posts) {
+                            return posts.get($routeParams.id);
+                        }]
+                }
         })
         .otherwise({
             redirectTo : '/home'

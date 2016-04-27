@@ -34,26 +34,22 @@ router.param('post', function(req, res, next, id) {
     var query = Post.findById(id);
 
     query.exec(function (err, post){
-        if (err) {
-            return next(err);
-        } else if (!post)
-        {
-            return next(new Error('can\'t find post'));
-        } else {
-            req.post = post;
-            return next();
-        }
+        if (err) {return next(err);}
+        if (!post) {return next(new Error('can\'t find post'));}
 
-
+        req.post = post;
+        return next();
     });
 });
 
 // return a post
 router.get('/posts/:post', function(req, res, next) {
     req.post.populate('comments', function(err, post) {
+        if (err) { return next(err); }
+
         res.json(post);
     });
-});
+    });
 
 //the upvote put request
 router.put('/posts/:post/upvote', function(req, res, next) {
@@ -77,7 +73,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
         req.post.save(function(err, post) {
             if(err){ return next(err); }
 
-            res.json(comment);
+            res.json(comment);/** this post was comment in the real code */
         });
     });
 });
@@ -97,15 +93,13 @@ router.param('comment', function(req, res, next, id) {
     var query = Comment.findById(id);
 
     query.exec(function (err, comment){
-        if (err) {
-            return next(err);
-        } else if (!comment)
-        {
+        if (err) {return next(err);}
+        if (!comment) {
             return next(new Error('can\'t find comment'));
-        } else {
-            req.comment = comment;
-            return next();
         }
+
+        req.comment = comment;
+        return next();
     });
 });
 

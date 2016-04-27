@@ -6,6 +6,7 @@ appControllers.controller('MainCtrl', ['$scope','posts',
         $scope.test = 'Hello world from angular';
         /*list of posts ordered b up vote using angular filter
          * posts.posts is the service.data*/
+        //postFactory.getAll();
         $scope.posts = posts.posts;
 
         //addPost() to add posts by users
@@ -16,7 +17,7 @@ appControllers.controller('MainCtrl', ['$scope','posts',
             }
             /*invoke the creat() method created in the post
             service to add posts to the db */
-            posts.creat({
+            posts.create({
                 title: $scope.title,
                 link: $scope.link,
             });
@@ -37,20 +38,31 @@ appControllers.controller('MainCtrl', ['$scope','posts',
 //The Posts page controller
 appControllers.controller('PostsCtrl', [
     '$scope',
-    '$routeParams',
     'posts',
-    function($scope, $routeParams, posts) {
+    'post',
+    function($scope, posts) {
+        //var post = posts.posts[$stateParams.id];
+        //posts.getPost(mypost._id);
+        $scope.post = post;
         //get the clicked post by its ID
-        $scope.post = posts.posts[$routeParams.id];
+        //$scope.post = posts.posts[$routeParams.id];
+        //posts.get($routeParams._id);
+        //$scope.post = posts.post;
         // an add Comment method
         $scope.addComment = function(){
             if($scope.body === '') { return; }
-            $scope.post.comments.push({
+            posts.addComment(post._id, {
                 body: $scope.body,
                 author: 'user',
-                upvotes: 0
+            }).success(function(comment) {
+                $scope.post.comments.push(comment);
             });
+
             $scope.body = '';
+        };
+
+        $scope.incrementUpvotes = function(comment){
+            posts.upvoteComment(post, comment);
         };
     }
 ]);

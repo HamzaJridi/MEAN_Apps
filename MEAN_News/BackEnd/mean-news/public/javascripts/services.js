@@ -1,7 +1,8 @@
 //a posts service that contains the data
 myApp.factory('posts', ['$http', function($http){
     var obj = {
-        posts: []
+        posts: [],
+        post: {}
     };
 
     /* a getAll methode connected with the REST get reqs
@@ -13,7 +14,7 @@ myApp.factory('posts', ['$http', function($http){
     };
 
     /*The post method to create new posts*/
-    obj.creat = function (post) {
+    obj.create = function (post) {
         /*post is the returned date from the REST post
          by res.json(post) */
         return $http.post('/posts', post).success(function(data){
@@ -27,6 +28,24 @@ myApp.factory('posts', ['$http', function($http){
                 post.upvotes += 1;
             });
     };
+
+    obj.get = function(id) {
+        return $http.get('/posts/' + id).then(function(res){
+            return res.data
+        });
+    };
+
+    obj.addComment = function(id, comment) {
+        return $http.post('/posts/' + id + '/comments', comment);
+    };
+
+    obj.upvoteComment = function(post, comment) {
+        return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote')
+            .success(function(data){
+                comment.upvotes += 1;
+            });
+    };
+
 
     return obj;
 
