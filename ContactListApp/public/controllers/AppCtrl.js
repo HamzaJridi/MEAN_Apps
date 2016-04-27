@@ -5,7 +5,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
 
     //get the received data from the server
     var refresh = function(){
-        $http.get('/users').success(function(response){
+        $http.get('/aaa').success(function(response){
             console.log('I got the requested data');
             $scope.contactlist = response;
             $scope.contact = "";
@@ -17,7 +17,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
          * it's bound by the ng-model from input fields in index.html*/
         console.log($scope.contact);
         //send the input data to the server
-        $http.post('/users', $scope.contact).success(function(response){
+        $http.post('/bbb', $scope.contact).success(function(response){
             console.log(response);
             //$scope.contactlist.push(response);
             refresh();

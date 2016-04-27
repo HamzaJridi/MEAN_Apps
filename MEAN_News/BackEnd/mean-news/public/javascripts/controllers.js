@@ -14,14 +14,11 @@ appControllers.controller('MainCtrl', ['$scope','posts',
             if(!$scope.title || $scope.title === '') {
                 return;
             }
-            $scope.posts.push({
+            /*invoke the creat() method created in the post
+            service to add posts to the db */
+            posts.creat({
                 title: $scope.title,
                 link: $scope.link,
-                upvotes : 0,
-                comments: [
-                    {author: 'Joe', body: 'Cool post!', upvotes: 0},
-                    {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
-                ]
             });
             $scope.title = "";
             $scope.link = "";
@@ -29,7 +26,7 @@ appControllers.controller('MainCtrl', ['$scope','posts',
 
         //incrementUpvotes() to enable incrementing upvotes
         $scope.incrementUpvotes = function(post){
-            post.upvotes +=1;
+            posts.upvote(post);
             /*a remove method example :
              var i = $scope.posts.indexOf(post);
              console.log(i)

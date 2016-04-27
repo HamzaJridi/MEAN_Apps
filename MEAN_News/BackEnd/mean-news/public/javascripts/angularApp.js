@@ -8,6 +8,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
         .when('/home', {
             templateUrl : '../html/home.html',
             controller : 'MainCtrl',
+            /*By using the resolve property in this way, we are ensuring that anytime
+            our home state is entered, we will automatically query all posts from
+            our backend before the home page finishes loading.*/
             resolve: {
                 "check": ['posts', function(posts){
                     return posts.getAll();

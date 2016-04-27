@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 /*set the route for the contactlist page
 * users is the collection name in the user db */
-app.get('/users', function(req, res) {
+app.get('/aaa', function(req, res) {
     console.log('I received a GET request');
     /*docs : data already in the db
      * find() : get the data in the db*/
@@ -24,7 +24,7 @@ app.get('/users', function(req, res) {
 });
 /* app.post : listen to the post request from the Ctrl (input data by addContact method)
  * insert the data in the db and send it back to th ctrl to display it*/
-app.post('/users', function(req, res){
+app.post('/bbb', function(req, res){
     /*console the received data from the post req
      * 'req.body' require the 'body-parser module to teach the server how to parse the input's body'
      * req.body : the inputted data in fields */
