@@ -5,14 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/news');
+require('./models/Posts');
+require('./models/Comments');
+
 //var routes = require('./routes');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-var mongoose = require('mongoose');
-var Post = require ('./models/Posts');
-var Comment = require ('./models/Comments');
-var db = mongoose.connect('mongodb://localhost/news');
 
 var app = express();
 
