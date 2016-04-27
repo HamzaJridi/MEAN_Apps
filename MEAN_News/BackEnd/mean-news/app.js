@@ -11,6 +11,7 @@ var users = require('./routes/users');
 
 var mongoose = require('mongoose');
 var Post = require ('./models/Posts');
+var Comment = require ('./models/Comments');
 var db = mongoose.connect('mongodb://localhost/news');
 
 var app = express();
