@@ -92,14 +92,18 @@ angular.module('myApp').factory('AuthService',
 
             }
 
-            function register(username, password) {
+            function register(firstname,lastname,username,password) {
 
                 // create a new instance of deferred
                 var deferred = $q.defer();
 
                 // send a post request to the server
                 $http.post('/user/register',
-                    {username: username, password: password})
+                    {
+                        firstname: firstname,
+                        lastname : lastname,
+                        username: username,
+                        password: password})
                     // handle success
                     .success(function (data, status) {
                         if(status === 200 && data.status){

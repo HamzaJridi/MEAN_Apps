@@ -7,39 +7,34 @@
 
             <div class="textintro">
                 <p>Please fill out the following fields</p>
-                <p ng-show="message">{{ message }}</p>
+                <p class="error validationerror" ng-show="error">{{errorMessage}}</p>
             </div>
 
             <fieldset>
                 <input type="text" name="firstname"
                        placeholder="First Name"
-                       ng-model="user.firstname"
+                       ng-model="registerForm.firstname"
                        ng-required="true">
                 <p class="error validationerror" ng-show="myform.firstname.$invalid && myform.firstname.$touched">
                     You must fill out your first name.</p>
 
                 <input type="text" name="lastname"
                        placeholder="Last Name"
-                       ng-model="user.lastname"
+                       ng-model="registerForm.lastname"
                        ng-required="true">
                 <p class="error validationerror" ng-show="myform.lastname.$invalid && myform.lastname.$touched">
                     You must fill out your last name.</p>
 
-
                 <input type="text" name="username"
                        placeholder="UserName"
-                       ng-model="registerForm.username">
+                       ng-model="registerForm.username"
+                       ng-required="true">
                 <p class="error validationerror" ng-show="myform.username.$invalid && myform.username.$touched">
-                    This must be a valid email.</p>
-
-
+                    This must be a valid UserName.</p>
 
                 <input type="password" name="password"
                        placeholder="Password"
-                       ng-model="registerForm.password"
-                       ng-minlength="6">
-                <p class="error validationerror" ng-show="myform.password.$invalid && myform.password.$touched">
-                    Password must be at least 6 characters</p>
+                       ng-model="registerForm.password">
             </fieldset>
 
             <button type="submit" class="btn">Submit</button>

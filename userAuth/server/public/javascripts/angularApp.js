@@ -4,7 +4,8 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when ('/', {
-        templateUrl : 'views/home.html'
+        templateUrl : 'views/home.html',
+        controller : 'HomeCtrl'
     })
         .when('/login', {
             templateUrl : 'views/login.html',
@@ -29,10 +30,12 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-myApp.controller('ctrl',['$scope',function($scope){
-    $scope.title = 'index.html page from Public'
-    $scope.message = 'Welcome to the Home page'
 
-}]);
-
-//module.exports = myApp;
+myApp.run(function ($rootScope, $location, $route, AuthService) {
+    $rootScope.$on('$routeChangeStart',
+        function (event, next, current) {
+            if (AuthService.isLoggedIn() === false) {
+                $location.path('/login');
+            }
+        });
+});

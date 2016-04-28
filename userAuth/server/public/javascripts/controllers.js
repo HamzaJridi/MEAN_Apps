@@ -1,3 +1,12 @@
+//Home Page Controller
+myApp.controller('HomeCtrl',['$scope',function($scope){
+    $scope.title = 'index.html page from Public'
+    $scope.message = 'Welcome to the Home page'
+
+}]);
+
+
+
 //Login Controller
 angular.module('myApp').controller('LoginCtrl',
     ['$scope', '$location', 'AuthService','$rootScope',
@@ -42,6 +51,38 @@ angular.module('myApp').controller('LoginCtrl',
         }
     ]);
 
+//Registernig Controller
+angular.module('myApp').controller('RegisterCtrl',
+    ['$scope', '$location', 'AuthService',
+        function ($scope, $location, AuthService) {
 
+            $scope.register = function () {
+
+                // initial values
+                $scope.error = false;
+                $scope.disabled = true;
+
+                // call register from service
+                AuthService.register($scope.registerForm.firstname,
+                                     $scope.registerForm.lastname,
+                                     $scope.registerForm.username,
+                                     $scope.registerForm.password)
+                    // handle success
+                    .then(function () {
+                        $location.path('/login');
+                        $scope.disabled = false;
+                        $scope.registerForm = {};
+                    })
+                    // handle error
+                    .catch(function () {
+                        $scope.error = true;
+                        $scope.errorMessage = "Sorry, Username exists already";
+                        $scope.disabled = false;
+                        $scope.registerForm = {};
+                    });
+
+            };
+
+        }]);
 
 
