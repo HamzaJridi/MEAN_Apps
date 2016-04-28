@@ -1,5 +1,6 @@
 var myApp = anguar.module('myApp',['ngRoute']);
 
+// setting Angular Routes
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when ('/', {
@@ -26,4 +27,8 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         .otherwise({
             redirectTo : '/'
         });
-}])
+}]);
+
+
+
+module.exports = myApp;
