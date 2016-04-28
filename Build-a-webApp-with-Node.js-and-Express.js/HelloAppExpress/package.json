@@ -1,0 +1,15 @@
+{
+  "name": "helloexpress",
+  "version": "1.0.0",
+  "description": "a Simple Express.js app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamza Jridi",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  }
+}
