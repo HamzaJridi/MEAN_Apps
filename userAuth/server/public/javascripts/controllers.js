@@ -24,6 +24,7 @@ angular.module('myApp').controller('LoginCtrl',
                         $location.path('/');
                         $scope.disabled = false;
                         $scope.loginForm = {};
+                        $rootScope.islogged = true;
                     })
                     // handle error
                     .catch(function () {
@@ -31,6 +32,7 @@ angular.module('myApp').controller('LoginCtrl',
                         $scope.errorMessage = "Invalid username and/or password";
                         $scope.disabled = false;
                         $scope.loginForm = {};
+                        $rootScope.islogged = false;
                     });
 
             };
@@ -41,7 +43,7 @@ angular.module('myApp').controller('LoginCtrl',
                 AuthService.logout()
                     .then(function () {
                         $location.path('/login');
-                        $rootScope.islogout = true;
+                        $rootScope.islogged = false;
                     });
 
             };
