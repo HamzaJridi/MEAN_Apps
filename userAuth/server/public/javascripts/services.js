@@ -1,16 +1,112 @@
 //Set an angular Service for handling authentication
-myApp.factory('AuthService',
+
+angular.module('myApp').factory('AuthService',
     ['$q','$timeout','$http',
         function($q, $timeout, $http){
-            //create a user var
-            var user = null;
+             //create a user var
+             var user = null;
 
-            // return available functions for use in the controllers
-            return ({
-                isLoggedIn: isLoggedIn,
-                getUserStatus: getUserStatus,
-                login: login,
-                logout: logout,
-                register: register
-            });
-        }]);
+             // return available functions for use in the controllers
+             return ({
+                 isLoggedIn: isLoggedIn,
+                 getUserStatus: getUserStatus,
+                 login: login,
+                 logout: logout,
+                 register: register
+             });
+            //isLoggedIn method
+            function isLoggedIn() {
+                if(user) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            //getUserStatus method
+            function getUserStatus() {
+                return user;
+            }
+
+            //login() method
+            function login(username, password){
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a login post request to the server
+                $http.post('/user/login',
+                    {username: username, password: password})
+                    // handle success
+                    .success(function (data, status) {
+                        if(status === 200 && data.status){
+                            user = true;
+                            deferred.resolve();
+                        } else {
+                            user = false;
+                            deferred.reject();
+                        }
+                    })
+                    // handle error
+                    .error(function (data) {
+                        user = false;
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            }
+
+            //Logot Method
+            function logout() {
+
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a get request to the server
+                $http.get('/user/logout')
+                    // handle success
+                    .success(function (data) {
+                        user = false;
+                        deferred.resolve();
+                    })
+                    // handle error
+                    .error(function (data) {
+                        user = false;
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            }
+
+            //Register function
+            function register(username, password) {
+
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a post request to the server
+                $http.post('/user/register',
+                    {username: username, password: password})
+                    // handle success
+                    .success(function (data, status) {
+                        if(status === 200 && data.status){
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                        }
+                    })
+                    // handle error
+                    .error(function (data) {
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            }
+
+
+        }//function inside the angular.module('myApp')
+    ]);//factory params

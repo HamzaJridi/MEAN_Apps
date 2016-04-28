@@ -1,5 +1,4 @@
-var myApp = anguar.module('myApp',['ngRoute']);
-
+var myApp = angular.module('myApp', ['ngRoute']);
 // setting Angular Routes
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -29,6 +28,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
+myApp.controller('ctrl',['$scope',function($scope){
+    $scope.title = 'index.html page from Public'
+    $scope.message = 'Welcome to the home page'
 
+}]);
 
-module.exports = myApp;
+//module.exports = myApp;

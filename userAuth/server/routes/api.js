@@ -4,9 +4,9 @@ var passport = require('passport');
 
 var User = require('../models/user.js');
 //User Registration
- /**-grab the values sent with the POST request (from the client-side) "req.body"
- * -create a new User instance,and add it to the database
- * - on this a user is created and if we attempt ti add a user with the same "username we'll have the error "A user with the given username is already registered" */
+ /**grab the values sent with the POST request (from the client-side) "req.body"
+  *create a new User instance,and add it to the database
+  *on this step a user is created and if we attempt ti add a user with the same "username we'll have the error "A user with the given username is already registered" */
 router.post('/register', function(req, res) {
     User.register(new User({ username: req.body.username }),
         req.body.password, function(err, account) {

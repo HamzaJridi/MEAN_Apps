@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>User Authentication</title>
 
+    <link rel="stylesheet" href="stylesheets/style.css">
+
     <!--angular library Scripts -->
     <script src="javascripts/lib/angular/angular.min.js"></script>
     <script src="javascripts/lib/angular/angular-route.min.js"></script>
+    <script src="javascripts/lib/angular/angular-animate.min.js"></script>
+    <!--My Scripts -->
     <script src="javascripts/services.js"></script>
     <script src="javascripts/controllers.js"></script>
     <script src="javascripts/angularApp.js"></script>
@@ -16,7 +20,16 @@
 
 
 </head>
-<body>
-<h1>Client Home page from Public</h1>
+<body ng-controller="ctrl">
+<header>
+    <nav class="cf" ng-include="'views/nav.html'"></nav>
+</header>
+<div class="page">
+    <main class="cf" ng-view></main>
+</div>
+<h1>{{title}}</h1>
+
+
+
 </body>
 </html>
