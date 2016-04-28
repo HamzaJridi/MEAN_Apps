@@ -65,7 +65,6 @@ app.use(function(err, req, res) {
     res.status(err.status || 500);
     res.end(JSON.stringify({
         message: err.message,
-        //name: err.name, to display the exact error : username or pwd
         error: {}
     }));
 });

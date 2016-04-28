@@ -1,20 +1,21 @@
 //Set an angular Service for handling authentication
 
 angular.module('myApp').factory('AuthService',
-    ['$q','$timeout','$http',
-        function($q, $timeout, $http){
-             //create a user var
-             var user = null;
+    ['$q', '$timeout', '$http',
+        function ($q, $timeout, $http) {
 
-             // return available functions for use in the controllers
-             return ({
-                 isLoggedIn: isLoggedIn,
-                 getUserStatus: getUserStatus,
-                 login: login,
-                 logout: logout,
-                 register: register
-             });
-            //isLoggedIn method
+            // create user variable
+            var user = null;
+
+            // return available functions for use in the controllers
+            return ({
+                isLoggedIn: isLoggedIn,
+                getUserStatus: getUserStatus,
+                login: login,
+                logout: logout,
+                register: register
+            });
+
             function isLoggedIn() {
                 if(user) {
                     return true;
@@ -22,17 +23,29 @@ angular.module('myApp').factory('AuthService',
                     return false;
                 }
             }
-            //getUserStatus method
+
             function getUserStatus() {
-                return user;
+                return $http.get('/user/status')
+                    // handle success
+                    .success(function (data) {
+                        if(data.status){
+                            user = true;
+                        } else {
+                            user = false;
+                        }
+                    })
+                    // handle error
+                    .error(function (data) {
+                        user = false;
+                    });
             }
 
-            //login() method
-            function login(username, password){
+            function login(username, password) {
+
                 // create a new instance of deferred
                 var deferred = $q.defer();
 
-                // send a login post request to the server
+                // send a post request to the server
                 $http.post('/user/login',
                     {username: username, password: password})
                     // handle success
@@ -56,7 +69,6 @@ angular.module('myApp').factory('AuthService',
 
             }
 
-            //Logot Method
             function logout() {
 
                 // create a new instance of deferred
@@ -80,7 +92,6 @@ angular.module('myApp').factory('AuthService',
 
             }
 
-            //Register function
             function register(username, password) {
 
                 // create a new instance of deferred
@@ -107,6 +118,4 @@ angular.module('myApp').factory('AuthService',
 
             }
 
-
-        }//function inside the angular.module('myApp')
-    ]);//factory params
+        }]);

@@ -1,4 +1,5 @@
 var myApp = angular.module('myApp', ['ngRoute']);
+
 // setting Angular Routes
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -6,15 +7,15 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl : 'views/home.html'
     })
         .when('/login', {
-            templaterl : 'views/login.html',
-            controller : 'loginCtrl'
+            templateUrl : 'views/login.html',
+            controller : 'LoginCtrl'
         })
         .when('/register', {
-            templaterl : 'views/register.html',
-            controller : 'registerCtrl'
+            templateUrl : 'views/register.html',
+            controller : 'RegisterCtrl'
         })
         .when('/logout', {
-            templaterl : 'views/logout.html',
+            templateUrl : 'views/login.html',
             controller : 'logoutCtrl'
         })
         .when('/one', {
@@ -30,7 +31,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
 
 myApp.controller('ctrl',['$scope',function($scope){
     $scope.title = 'index.html page from Public'
-    $scope.message = 'Welcome to the home page'
+    $scope.message = 'Welcome to the Home page'
 
 }]);
 
