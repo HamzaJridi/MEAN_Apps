@@ -24,7 +24,7 @@ var app = express();
 var routes = require('./routes/api.js');
 
 //define middlewares
-app.use(express.static(path.join(__dirname, '../client')));
+//app.use(express.static(path.join(__dirname, '../client')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,16 +44,32 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // routes
-app.use('/user/', routes);
+app.use('/user', routes);
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client', 'index.html'));
+    res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
-
 
 app.get('/', function(req,res){
     res.send('Welcome to the API')
 });
+
+// error hndlers
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+app.use(function(err, req, res) {
+    res.status(err.status || 500);
+    res.end(JSON.stringify({
+        message: err.message,
+        //name: err.name, to display the exact error : username or pwd
+        error: {}
+    }));
+});
+
 
 app.listen(port, function(){
     console.log('Gulp is running the App on PORT ' + port);
