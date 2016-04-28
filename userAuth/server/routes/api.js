@@ -10,7 +10,7 @@ var User = require('../models/user.js');
 router.post('/register', function(req, res) {
     User.register (new User({firstname: req.body.firstname,
                             lastname: req.body.lastname,
-                            username: req.body.username,
+                            username: req.body.username
                              }),
         req.body.password, function(err, account) {
             if (err) {
@@ -52,14 +52,14 @@ router.post('/login', function(req,res,next){
 });//router.post method
 
 //Logging Out the user
-router.get('/logout', function(req,res){
+router.get('/logout', function(req, res) {
     req.logout();
     res.status(200).json({
-        status : 'User Logged Out, Bye!!'
+        status: 'User Logged Out..Bye!!'
     });
 });
 
-//persist the user login after refresh
+//persist the user session after refresh
 router.get('/status', function(req, res) {
     if (!req.isAuthenticated()) {
         return res.status(200).json({
@@ -70,7 +70,6 @@ router.get('/status', function(req, res) {
         status: true
     });
 });
-
 
 
 module.exports = router;

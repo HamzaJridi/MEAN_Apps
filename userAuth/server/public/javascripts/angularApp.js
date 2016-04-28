@@ -13,18 +13,18 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             controller : 'LoginCtrl',
             access: {restricted: false}
         })
+        .when('/logout', {
+            controller : 'LoginCtrl',
+            access: {restricted: true}
+        })
         .when('/register', {
             templateUrl : 'views/register.html',
             controller : 'RegisterCtrl',
             access: {restricted: false}
         })
-        /*.when('/logout', {
-            templateUrl : 'views/login.html',
-            controller : 'logoutCtrl'
-        })*/
         .when('/one', {
             template: '<h1>This is page One!</h1>',
-            access: {restricted: false}
+            access: {restricted: true}
         })
         .when('/two', {
             template: '<h1>This is page Two!</h1>',
@@ -36,7 +36,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 /*restrict the access to pages according to the state
-* of the logged In user and the acces.restricted property
+* of the logged In user and the access.restricted property
 * that is set for every route independently */
 
 myApp.run(function ($rootScope, $location, $route, AuthService) {
@@ -50,5 +50,5 @@ myApp.run(function ($rootScope, $location, $route, AuthService) {
                     }
                 });
         });
-    });
+});
 

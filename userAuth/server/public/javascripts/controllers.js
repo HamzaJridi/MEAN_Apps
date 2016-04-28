@@ -17,7 +17,6 @@ angular.module('myApp').controller('LoginCtrl',
                 // initial values
                 $scope.error = false;
                 $scope.disabled = true;
-                $rootScope.isLogin = false;
                 // call login from service
                 AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                     // handle success
@@ -25,7 +24,6 @@ angular.module('myApp').controller('LoginCtrl',
                         $location.path('/');
                         $scope.disabled = false;
                         $scope.loginForm = {};
-                        $rootScope.isLogin = true;
                     })
                     // handle error
                     .catch(function () {
@@ -33,23 +31,41 @@ angular.module('myApp').controller('LoginCtrl',
                         $scope.errorMessage = "Invalid username and/or password";
                         $scope.disabled = false;
                         $scope.loginForm = {};
-                        $rootScope.isLogin = false;
                     });
 
             };
 
             $scope.logout = function () {
-                $rootScope.isLogin = true;
+
                 // call logout from service
                 AuthService.logout()
                     .then(function () {
-                        $rootScope.isLogin = false;
                         $location.path('/login');
+                        $rootScope.islogout = true;
                     });
+
+            };
+        }
+    ])
+
+
+/*angular.module('myApp').controller('logoutController',
+    ['$scope', '$location', 'AuthService','$rootScope',
+        function ($scope, $location, AuthService,$rootScope) {
+
+            $scope.logout = function () {
+
+                // call logout from service
+                AuthService.logout()
+                    .then(function () {
+                        $location.path('/login');
+                        $rootScope.islogout = true;
+                    });
+
             };
 
-        }
-    ]);
+        }]);*/
+
 
 //Registernig Controller
 angular.module('myApp').controller('RegisterCtrl',
