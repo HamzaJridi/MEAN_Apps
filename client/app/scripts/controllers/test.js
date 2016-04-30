@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:MainCtrl
+ * @name clientApp.controller:TestCtrl
  * @description
- * # MainCtrl
+ * # TestCtrl
  * Controller of the clientApp
  */
 angular.module('clientApp')
-      .controller('MainCtrl', ['$scope', function ($scope) {
+      .controller('TestCtrl', ['$scope', function ($scope) {
         $scope.message = "Movies Home"
-        $scope.movies = [
+        $scope.articles = [
           {
             title : "A new Hope",
             url : "http://youtube.com"
@@ -20,4 +20,4 @@ angular.module('clientApp')
             url : "http://youtube.com"
           }
         ];
-  }]);
+      }]);
