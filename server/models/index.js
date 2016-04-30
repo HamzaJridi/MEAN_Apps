@@ -5,7 +5,7 @@
 */
 
 module.exports = {
-    movie : require('./movie.js')
+    movie: require('./movie')
     //if e.g we've a Car model
     //car : require('./car.js')
 };

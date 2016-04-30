@@ -1,10 +1,9 @@
-var require = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
-var movieSchema = Schema({
+var movieSchema = new mongoose.Schema({
     title : {type : String, required :true },
     director : {type : String, required :true },
-    release_date : {type : Date, required :true },
+    releaseDate : {type : Date, required :true },
     url : {type : String, required :true }
 
 });

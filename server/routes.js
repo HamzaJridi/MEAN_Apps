@@ -9,5 +9,5 @@
 
 //at the '/movie' route, execute the movieController code
 module.exports = {
-    '/movie' : require('./contllers/movieController')
+    '/movies' : require('./controllers/movieController')
 };

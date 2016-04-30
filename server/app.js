@@ -31,14 +31,14 @@ mongoose.connection.once('open', function(){
     *  assign "require('./contllers/movieController')" from the routes.js to 'controller'
     *  assign the './movie' from routes.js to the 'route' var
     * */
-    _.each(routes, function (controller, route) {
-        app.use(route, controller(app,route));
+    _.each(routes, function(controller, route) {
+        app.use(route, controller(app, route));
         /** the app,route args are from movieController
          * the controller = require('./contllers/movieController')
          * and the movieController returns a func with app,route args that handles the REST Api
          * and that func returs a middleware, so the controller(app,route) will return this
          * middleware*/
-    })//_.each func
+    });//_.each func
 });//mongoose.connection func
 
 
@@ -47,6 +47,7 @@ var port = process.env.PORT || 3000;
 app.get('/', function(req, res){
     res.send('Welcome to my API, The Home Of Movies')
 });
+
 /* Using app.use for Content Routes :
  * app.use('/hello', function(req,res,next){
    res.send('Hello from, The Home Of Movies')
