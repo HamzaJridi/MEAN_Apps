@@ -10,26 +10,31 @@
  */
 angular
   .module('clientApp', [
-    'ngRoute'
+        'ngRoute',
+        'restangular'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/movies', {
-        templateUrl: 'views/movies.html',
-        controller: 'MoviesCtrl',
-        controllerAs: 'movie'
-      })
-      .when('/test', {
-        templateUrl: 'views/test.html',
-        controller: 'TestCtrl',
-        controllerAs: 'test'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  .config(function ($routeProvider,RestangularProvider) {
+
+        // Set the base URL for Restangular.
+        RestangularProvider.setBaseUrl('http://localhost:8000');
+
+        $routeProvider
+              .when('/', {
+                templateUrl: 'views/main.html',
+                controller: 'MainCtrl',
+                controllerAs: 'main'
+              })
+              .when('/movies', {
+                templateUrl: 'views/movies.html',
+                controller: 'MoviesCtrl',
+                controllerAs: 'movie'
+              })
+              .when('/test', {
+                templateUrl: 'views/test.html',
+                controller: 'TestCtrl',
+                controllerAs: 'test'
+              })
+              .otherwise({
+                redirectTo: '/'
+        });
   });
