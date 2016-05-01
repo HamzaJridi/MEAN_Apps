@@ -1,0 +1,17 @@
+{
+  "name": "chatappwithsocket.io",
+  "description": "a Chat Application with socket.io",
+  "main": "app.js",
+  "authors": [
+    "Hamza"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/HamzaJridi/MEAN_Apps",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

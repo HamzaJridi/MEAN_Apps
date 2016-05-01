@@ -1,0 +1,8 @@
+<div class="branding"><a ng-href="#/">MEAN Auth</a></div>
+<ul>
+    <li ng-controller="LoginCtrl"><a ng-show="islogged" ng-href="#/login" ng-click="logout()">Logout</a></li>
+    <li><a ng-href="#/two">Two</a></li>
+    <li><a ng-href="#/one">One</a></li>
+    <li><a ng-show="!islogged" ng-href="#/register">Register</a></li>
+    <li><a ng-show="!islogged" ng-href="#/login">Login</a></li>
+</ul>
