@@ -8,12 +8,13 @@
  *
  * Main module of the application.
  */
-angular
+var clientApp = angular
   .module('clientApp', [
         'ngRoute',
         'restangular'
-  ])
-  .config(function ($routeProvider,RestangularProvider) {
+  ]);
+
+clientApp.config(function ($routeProvider,RestangularProvider) {
 
         // Set the base URL for Restangular.
         RestangularProvider.setBaseUrl('http://localhost:8000');
@@ -37,24 +38,27 @@ angular
               .otherwise({
                 redirectTo: '/'
         });
-  })
+  });
+
     /** MovieRestangular Service :
      * the Restangular prjct expects an 'id' arg but
      * mongo db has an "_id", so this service will convert
      * "_id" to "id"*/
-    .factory('MovieRestangular', function(Restangular) {
+    clientApp.factory('MovieRestangular', function(Restangular) {
         return Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setRestangularFields({
                 id: '_id'
             });
         });
-    })
+    });
+
     /* The Movie factory is an object tha we can include in
     * our controllers and it give us the ability to create
     * and lidt new movies*/
-    .factory('Movie', function(MovieRestangular) {
-        return MovieRestangular.service('movie');
-        /*service('movie') : movie points to the url in the api
+clientApp.factory('Movie', function(MovieRestangular) {
+        return MovieRestangular.service('movies');
+        /*service('movie') : movie points to the url route
+        in the api (the same in the angular routes)
         *--> at that API url I want to use the 'Movie' objct
         * to pint to the 'movie' in point*/
     });

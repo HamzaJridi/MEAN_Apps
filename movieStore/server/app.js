@@ -26,7 +26,7 @@ mongoose.connection.once('open', function(){
     app.models = require ('./models/index');
 
     //Load the routes
-    var routes = require('./routes');
+    var routes = require('./routes');//routes.js
     /* _.each : iterates over all the routes,
     *  assign "require('./contllers/movieController')" from the routes.js to 'controller'
     *  assign the './movie' from routes.js to the 'route' var
