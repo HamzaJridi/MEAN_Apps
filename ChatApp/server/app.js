@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 var server = require('http').Server(app);
+<<<<<<< HEAD
 var io = require('socket.io')(server);
 
 var messages = [{
@@ -49,6 +50,12 @@ io.on('connection', function(socket){
         io.sockets.emit('messages',messages);
     });
 
+=======
+
+app.get('/', function(req,res){
+    res.send('Hello World');
+    console.log(' Something is connected to express');
+>>>>>>> eb908063496a8024834bf7192d7fd4be17ab87f9
 });
 
 server.listen(8000);

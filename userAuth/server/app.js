@@ -34,13 +34,20 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+<<<<<<< HEAD
 
 // configure passport
+=======
+>>>>>>> eb908063496a8024834bf7192d7fd4be17ab87f9
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< HEAD
 
+=======
+// configure passport
+>>>>>>> eb908063496a8024834bf7192d7fd4be17ab87f9
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
