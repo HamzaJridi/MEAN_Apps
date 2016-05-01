@@ -25,15 +25,35 @@ clientApp.config(function ($routeProvider,RestangularProvider) {
                 controller: 'MainCtrl',
                 controllerAs: 'main'
               })
+              .when('/test', {
+                templateUrl: 'views/test.html',
+                controller: 'TestCtrl',
+                controllerAs: 'test'
+              })
               .when('/movies', {
                 templateUrl: 'views/movies.html',
                 controller: 'MoviesCtrl',
                 controllerAs: 'movie'
               })
-              .when('/test', {
-                templateUrl: 'views/test.html',
-                controller: 'TestCtrl',
-                controllerAs: 'test'
+              .when('/create/movie', {
+                templateUrl: 'views/movie-add.html',
+                controller: 'MovieAddCtrl',
+                controllerAs: 'movieAdd'
+              })
+              .when('/movie/:id', {
+                templateUrl: 'views/movie-view.html',
+                controller: 'MovieViewCtrl',
+                controllerAs: 'movieView'
+              })
+              .when('/movie/:id/delete', {
+                templateUrl: 'views/movie-delete.html',
+                controller: 'MovieDeleteCtrl',
+                controllerAs: 'movieDelete'
+              })
+              .when('/movie/:id/edit', {
+                templateUrl: 'views/movie-edit.html',
+                controller: 'MovieEditCtrl',
+                controllerAs: 'movieEdit'
               })
               .otherwise({
                 redirectTo: '/'
@@ -57,8 +77,9 @@ clientApp.config(function ($routeProvider,RestangularProvider) {
     * and lidt new movies*/
 clientApp.factory('Movie', function(MovieRestangular) {
         return MovieRestangular.service('movies');
-        /*service('movie') : movie points to the url route
-        in the api (the same in the angular routes)
+        /*service('movies') : movies points to the url route in the api
+        *it has to be the same as the one in "routes.js" file in the server part
+        *it has nothing to do with the angular routes names
         *--> at that API url I want to use the 'Movie' objct
-        * to pint to the 'movie' in point*/
+        * to point to the 'movies' in point*/
     });
