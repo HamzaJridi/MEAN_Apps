@@ -5,6 +5,7 @@ var routes = function (Task) {
   var todoRouter = express.Router();
   todoRouter.route('/')
     .get(function (req, res) {
+      console.log('I received a GET request');
       Task.find(function (err, tasks) {
         if (err) {
           res.status(500).send(err);
@@ -16,12 +17,14 @@ var routes = function (Task) {
     .post(function (req, res) {
       var task = new Task(req.body);
       task.save();
-      res.status(201).send(task);
+      res.status(201).send({
+        taskId:task._id
+      });
     });
 
   //middleware to get the taskID
-  todoRouter.use('/:taskId', function (req, res, next) {
-    Task.findById(req.params.taskId, function (err, task) {
+  todoRouter.use('/:id', function (req, res, next) {
+    Task.findById(req.params.id, function (err, task) {
       if (err) {
         res.status(500).send(err);
       }
@@ -35,7 +38,7 @@ var routes = function (Task) {
     });
   });
 
-  todoRouter.route('/:taskId')
+  todoRouter.route('/:id')
     .get(function(req,res){
       res.json(req.task);
     })

@@ -14,7 +14,7 @@ var port = process.env.PORT || 3000;
 /** the bodyParser'll look at the body, and if it has a json
  * objct in it, it'll add it to the req.body by the post method*/
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());todo
+app.use(bodyParser.json());
 
 /** bookRouter is returned from the routes() method in
  * the bookRoutes.js file */

@@ -5,14 +5,14 @@
   <title>To Do List</title>
 
   <!-- Add JQuery + Bootstrap JS / CSS + AngularJS-->
-  <script src="javascripts/lib/jquery.min.js"></script>
-  <script src="javascripts/lib/bootstrap/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="javascripts/lib/bootstrap/css/bootstrap.min.css" />
-  <script src="javascripts/lib/angular/angular.min.js"></script>
-  <script src="javascripts/lib/angular/angular-route.min.js"></script>
+  <script src="public/javascripts/lib/jquery.min.js"></script>
+  <script src="public/javascripts/lib/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="public/javascripts/lib/bootstrap/css/bootstrap.min.css" />
+  <script src="public/javascripts/lib/angular/angular.min.js"></script>
+  <script src="public/javascripts/lib/angular/angular-route.min.js"></script>
 
   <!-- My scripts/ Stylesheets-->
-  <script src="angularApp.js"></script>
+  <script src="public/angularApp.js"></script>
 
   <style>
     /*styling the done task with a line-through*/
@@ -28,7 +28,7 @@
 
     <!--List of Items-->
     <div class="row">
-      <div ng-repeat="item in todo.list" style="padding: 10px">
+      <div ng-repeat="item in todo.list track by item._id" style="padding: 10px">
         <button class="btn btn-warning" ng-click="todo.removeItem(item)">
           <span class="glyphicon glyphicon-remove"></span>
         </button>

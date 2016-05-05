@@ -1,34 +1,47 @@
 var myApp = angular.module('myApp', []);
 
 
-//myApp.service('guidService', function () {
-//  return {
-//    createGuid: function () {
-//      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-//        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-//        return v.toString(16);
-//      });
-//    }
-//  };
-//});
+myApp.service('restService', ['$http',function ($http) {
+  var root = '/mytasks';
+  return {
+    getItems : function() {
+      return $http.get(root);
+    },
+    addItem : function(item){
+      return $http.post(root,item);
+    },
+    removeItem : function(item){
+      return $http.delete(root+'/'+item._id);
+    }
+  };
+}]);
 
-myApp.controller('MainCtrl', ['$scope', function ($scope) {
+myApp.controller('MainCtrl', ['$scope', 'restService', function ($scope,restService) {
     var todo = {};
 
     //the list of tasks to do
-    todo.list = [
-        {details : "Demo First Item",done:false},
-        {details : "Demo Second Item",done:false}
-    ];
+    todo.list = [];
+
+    //get all tasks by the getItems method from the service
+    restService.getItems().then(function (response) {
+      console.log('I got the requested data');
+      todo.list=response.data.items;
+    });
 
     //the addItem method to add tasks to the list
     todo.addItem = function () {
+      var item = {
+        details: todo.newItemDetails
+      };
+      todo.newItemDetails = "";
+
+      restService.addItem(item).then(function(response){
         todo.list.push({
-          //_id: guidService.createGuid(),
-          details: todo.newItemDetails,
-          done:false
+          _id:response.data.taskId,
+          details:item.details,
+          done:item.done
         });
-        todo.newItemDetails = "";
+      });
     };
 
     //the removeItem method, to remove done tasks
@@ -36,6 +49,7 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
         todo.list=todo.list.filter(function (item) {
           return item._id !== itemToRemove._id;
         });
+        restService.removeItem(itemToRemove);
     };
 
 
