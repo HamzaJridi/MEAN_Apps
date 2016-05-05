@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 <head>
-    <meta charset="UTF-8">
-    <title>To Do List</title>
+  <meta charset="UTF-8">
+  <title>To Do List</title>
 
-    <!-- Add JQuery + Bootstrap JS / CSS + AngularJS-->
-    <script src="javascripts/lib/jquery.min.js"></script>
-    <script src="javascripts/lib/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="javascripts/lib/bootstrap/css/bootstrap.min.css" />
-    <script src="javascripts/lib/angular/angular.min.js"></script>
-    <script src="javascripts/lib/angular/angular-route.min.js"></script>
+  <!-- Add JQuery + Bootstrap JS / CSS + AngularJS-->
+  <script src="javascripts/lib/jquery.min.js"></script>
+  <script src="javascripts/lib/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="javascripts/lib/bootstrap/css/bootstrap.min.css" />
+  <script src="javascripts/lib/angular/angular.min.js"></script>
+  <script src="javascripts/lib/angular/angular-route.min.js"></script>
 
-    <!-- My scripts/ Stylesheets-->
-    <script src="angularApp.js"></script>
+  <!-- My scripts/ Stylesheets-->
+  <script src="angularApp.js"></script>
 
 </head>
 <body ng-controller="MainCtrl">
-<h1>{{message}}</h1>
+  <div class="container">
+    <h1>My Tasks</h1>
 
+    <!--List of Items-->
+    <div class="row">
+      <div ng-repeat="item in todo.list" style="padding: 10px">
+        <button class="btn btn-danger" ng-click="todo.removeItem(item)">X</button>
+        {{item.details}}
+      </div>
+    </div>
+
+    <!--New Item Row-->
+    <div class="row">
+      <form role="form">
+        <div class="form-group">
+          <label>New Item Details:</label>
+          <input type="text" class="form-control"
+                 placeholder="Details of new todo item"
+                 ng-model="todo.newItemDetails"/>
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                ng-click="todo.addItem()"
+                ng-disabled="!todo.newItemDetails">Add Task</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
