@@ -14,6 +14,13 @@
   <!-- My scripts/ Stylesheets-->
   <script src="angularApp.js"></script>
 
+  <style>
+    /*styling the done task with a line-through*/
+    .done {
+      text-decoration: line-through;
+      color:#ccc;
+    }
+  </style>
 </head>
 <body ng-controller="MainCtrl">
   <div class="container">
@@ -22,9 +29,14 @@
     <!--List of Items-->
     <div class="row">
       <div ng-repeat="item in todo.list" style="padding: 10px">
-        <button class="btn btn-danger" ng-click="todo.removeItem(item)">X</button>
-        {{item.details}}
+        <button class="btn btn-warning" ng-click="todo.removeItem(item)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <input type="checkbox" ng-model="item.done" />
+        <!-- add a 'done' class to all done tasks -->
+        <span ng-class="{'done':item.done}">{{item.details}}</span>
       </div>
+      <button ng-click="todo.clearCompleted()" class="btn btn-lg btn-danger">Clear Completed</button>
     </div>
 
     <!--New Item Row-->
